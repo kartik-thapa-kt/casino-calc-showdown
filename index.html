@@ -3,22 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>casino-calc-showdown</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <meta property="og:title" content="casino-calc-showdown" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <title>🎰 Casino Calculator Showdown</title>
+    <meta name="description" content="Casino-themed number calculator game" />
+    <meta name="author" content="Casino Calc" />
+    <link rel="stylesheet" href="styles.css">
   </head>
 
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="casino-container">
+      <header class="casino-header">
+        <h1>🎰 CASINO CALCULATOR 🎰</h1>
+        <p class="casino-subtitle">Place Your Numbers and Test Your Luck!</p>
+      </header>
+
+      <div class="game-board">
+        <form id="casino-form" class="casino-form">
+          <div class="input-group">
+            <label for="number1">🎲 First Number:</label>
+            <input type="number" id="number1" name="number1" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="number2">🎲 Second Number:</label>
+            <input type="number" id="number2" name="number2" required>
+          </div>
+          
+          <button type="submit" class="casino-button">🎰 ROLL THE DICE! 🎰</button>
+        </form>
+
+        <div id="results" class="results-container" style="display: none;">
+          <div class="result-main">
+            <h3>🎯 Result: <span id="main-result"></span></h3>
+          </div>
+          
+          <div id="winner-outputs" class="winner-section" style="display: none;">
+            <h4>🏆 JACKPOT! You Win! 🏆</h4>
+            <div class="output-pair">
+              <div class="output-item">
+                <span class="output-label">💰 Bonus 1:</span>
+                <span id="output1"></span>
+              </div>
+              <div class="output-item">
+                <span class="output-label">💎 Bonus 2:</span>
+                <span id="output2"></span>
+              </div>
+            </div>
+          </div>
+          
+          <div id="loser-message" class="loser-section" style="display: none;">
+            <h4>🎪 Better Luck Next Time! 🎪</h4>
+            <p id="lose-message"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="casino-footer">
+        <p>🍀 May the odds be in your favor! 🍀</p>
+      </div>
+    </div>
+
+    <script src="calculator.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
