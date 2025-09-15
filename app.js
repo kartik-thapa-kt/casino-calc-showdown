@@ -1,3 +1,33 @@
+function arbitrageChecker(a, b) {
+    return (Math.pow(a, -1) + Math.pow(b, -1)) < 0.1;
+}
+
+function ratioFirst(a, b) {
+    let top = Math.pow(a, -1);
+    let bottom = Math.pow(a, -1) + Math.pow(b, -1);
+    return top / bottom;
+}
+
+// Process numbers using arbitrage logic
+function processNumbers(a, b, amount) {
+    if (!arbitrageChecker(a, b)) {
+        return {
+            mainResult: 0,
+            message: "Not worth it (no arbitrage opportunity)."
+        };
+    } else {
+        const betOnA = ratioFirst(a, b) * amount;
+        const betOnB = (1 - ratioFirst(a, b)) * amount;
+        const profit = (betOnA * a) - amount;
+
+        return {
+            mainResult: 1,
+            output1: `Bet on first = ${betOnA.toFixed(2)}`,
+            output2: `Bet on second = ${betOnB.toFixed(2)} | Profit = ${profit.toFixed(2)}`
+        };
+    }
+}
+
 // Main application logic
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('casino-form');
@@ -15,37 +45,33 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get input values
         const num1 = parseFloat(document.getElementById('number1').value);
         const num2 = parseFloat(document.getElementById('number2').value);
+        const amount = parseFloat(document.getElementById('amount').value);
         
         // Validate inputs
-        if (isNaN(num1) || isNaN(num2)) {
-            alert('Please enter valid numbers!');
+        if (isNaN(num1) || isNaN(num2) || isNaN(amount)) {
+            alert('Please enter valid numbers (odds + bet amount)!');
             return;
         }
         
-        // Process numbers using the calculator
-        const result = processNumbers(num1, num2);
+        // Process numbers using arbitrage logic
+        const result = processNumbers(num1, num2, amount);
         
         // Display main result
         mainResultSpan.textContent = result.mainResult;
         
         // Show/hide appropriate sections based on result
         if (result.mainResult === 1) {
-            // Winner - show bonus outputs
             output1Span.textContent = result.output1;
             output2Span.textContent = result.output2;
             winnerOutputs.style.display = 'block';
             loserMessage.style.display = 'none';
         } else {
-            // Loser - show message
             loseMessageP.textContent = result.message;
             loserMessage.style.display = 'block';
             winnerOutputs.style.display = 'none';
         }
         
-        // Show results container
         resultsContainer.style.display = 'block';
-        
-        // Scroll to results
         resultsContainer.scrollIntoView({ behavior: 'smooth' });
     });
     
@@ -65,18 +91,15 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.body.appendChild(icon);
         
-        // Animate upward
         setTimeout(() => {
             icon.style.top = '-10vh';
             icon.style.opacity = '0';
         }, 100);
         
-        // Remove element after animation
         setTimeout(() => {
             document.body.removeChild(icon);
         }, 8000);
     }
     
-    // Create floating icons periodically
     setInterval(createFloatingIcon, 3000);
 });

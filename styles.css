@@ -267,3 +267,17 @@ body {
         align-items: center;
     }
 }
+
+/* 🎯 Watermark Footer */
+.watermark-footer {
+    position: fixed;
+    bottom: 5px;
+    right: 10px;
+    font-size: 0.8rem;
+    color: white; /* subtle like watermark */
+    pointer-events: none; /* does not block clicks */
+    user-select: none;   /* cannot highlight/copy */
+    font-style: italic;
+    font-family: 'Courier New', monospace;
+  }
+  
