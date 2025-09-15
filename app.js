@@ -1,5 +1,5 @@
 function arbitrageChecker(a, b) {
-    return (Math.pow(a, -1) + Math.pow(b, -1)) < 0.1;
+    return (Math.pow(a, -1) + Math.pow(b, -1)) < 1;
 }
 
 function ratioFirst(a, b) {
